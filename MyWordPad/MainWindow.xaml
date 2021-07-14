@@ -1,0 +1,139 @@
+﻿<Window x:Class="MyWordPad.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MyWordPad"
+      xmlns:ext="http://schemas.xceed.com/wpf/xaml/toolkit"
+        
+        Title="MainWindow" Height="500" Width="700">
+    <Window.Resources>
+        <BitmapImage x:Key="newicon" UriSource="new.png"/>
+        <BitmapImage x:Key="openicon" UriSource="open.png"/>
+        <BitmapImage x:Key="saveicon" UriSource="save.png"/>
+        <BitmapImage x:Key="exiticon" UriSource="exit.png"/>
+        <BitmapImage x:Key="undoicon" UriSource="undo.png"/>
+        <BitmapImage x:Key="redoicon" UriSource="redo.png"/>
+        <BitmapImage x:Key="selectallicon" UriSource="selectall.png"/>
+        <BitmapImage x:Key="cuticon" UriSource="cut.png"/>
+        <BitmapImage x:Key="copyicon" UriSource="copy.png"/>
+        <BitmapImage x:Key="pasteicon" UriSource="paste.png"/>
+        <BitmapImage x:Key="lefticon" UriSource="leftalign.png"/>
+        <BitmapImage x:Key="centericon" UriSource="centeralign.png"/>
+        <BitmapImage x:Key="righticon" UriSource="rightalign.png"/>
+        <BitmapImage x:Key="boldicon" UriSource="bold.png"/>
+        <BitmapImage x:Key="italicicon" UriSource="italic.png"/>
+        <BitmapImage x:Key="underlineicon" UriSource="underline.png"/>
+        <BitmapImage x:Key="increasefonticon" UriSource="increasefont.png"/>
+        <BitmapImage x:Key="decreasefonticon" UriSource="decreasefont.png"/>
+        <BitmapImage x:Key="abouticon" UriSource="about.png"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.CommandBindings>
+            <CommandBinding x:Name="newbinding" Command="ApplicationCommands.New" CanExecute="newbinding_CanExecute" Executed="newbinding_Executed"/>
+            <CommandBinding x:Name="openbinding" Command="ApplicationCommands.Open" CanExecute="openbinding_CanExecute" Executed="openbinding_Executed"/>
+            <CommandBinding x:Name="savebinding" Command="ApplicationCommands.Save" CanExecute="savebinding_CanExecute" Executed="savebinding_Executed"/>
+            <CommandBinding x:Name="undobinding" Command="ApplicationCommands.Undo"/>
+            <CommandBinding x:Name="exitbinding" Command="local:CustomCommands.Exit" CanExecute="exitbinding_CanExecute" Executed="exitbinding_Executed"/>
+            <CommandBinding x:Name="redobinding" Command="ApplicationCommands.Redo"/>
+            <CommandBinding x:Name="selectallbinding" Command="ApplicationCommands.SelectAll"/>
+            <CommandBinding x:Name="cutbinding" Command="ApplicationCommands.Cut"/>
+            <CommandBinding x:Name="copybinding" Command="ApplicationCommands.Copy"/>
+            <CommandBinding x:Name="pastebinding" Command="ApplicationCommands.Paste"/>
+            <CommandBinding x:Name="leftalignbinding" Command="EditingCommands.AlignLeft"/>
+            <CommandBinding x:Name="centeralignbinding" Command="EditingCommands.AlignCenter"/>
+            <CommandBinding x:Name="rightalignbinding" Command="EditingCommands.AlignRight"/>
+            <CommandBinding x:Name="boldbinding" Command="EditingCommands.ToggleBold"/>
+            <CommandBinding x:Name="italicbinding" Command="EditingCommands.ToggleItalic"/>
+            <CommandBinding x:Name="underlinebinding" Command="EditingCommands.ToggleUnderline"/>
+            <CommandBinding x:Name="increasefontbinding" Command="EditingCommands.IncreaseFontSize"/>
+            <CommandBinding x:Name="decreasefontbinding" Command="EditingCommands.DecreaseFontSize"/>
+        </Grid.CommandBindings>
+        <ToolBarTray Background="White">
+            <ToolBar Band="1" BandIndex="1" Height="50">
+                <Button CommandTarget="{Binding richTextBox1}" Command="ApplicationCommands.New" ToolTip="New">
+                    <Image Source="{StaticResource newicon}"/>
+                </Button>
+                <Button CommandTarget="{Binding richTextBox1}" Command="ApplicationCommands.Open" ToolTip="Open" Click="Button_Click">
+                    <Image Source="{StaticResource openicon}"/>
+                </Button>
+                <Button CommandTarget="{Binding richTextBox1}" Command="ApplicationCommands.Save" ToolTip="Save">
+                    <Image Source="{StaticResource saveicon}"/>
+                </Button>
+              
+            </ToolBar>
+            <ToolBar Band="1" BandIndex="2" Height="50">
+                <Button Command="ApplicationCommands.Undo" ToolTip="Undo">
+                    <Image Source="{StaticResource undoicon}"/>
+                </Button>
+                <Button Command="ApplicationCommands.Redo" ToolTip="Redo">
+                    <Image Source="{StaticResource redoicon}"/>
+                </Button>
+            </ToolBar>
+            <ToolBar Band="1" BandIndex="3" Height="50">
+                <Button Command="ApplicationCommands.SelectAll" ToolTip="Select All">
+                    <Image Source="{StaticResource selectallicon}"/>
+                </Button>
+                <Button Command="ApplicationCommands.Cut" ToolTip="Cut">
+                    <Image Source="{StaticResource cuticon}"/>
+                </Button>
+                <Button Command="ApplicationCommands.Copy" ToolTip="Copy">
+                    <Image Source="{StaticResource copyicon}"/>
+                </Button>
+                <Button Command="ApplicationCommands.Paste" ToolTip="Paste">
+                    <Image Source="{StaticResource pasteicon}"/>
+                </Button>
+            </ToolBar>
+            <ToolBar Band="1" BandIndex="4" Height="50">
+                <Button Command="EditingCommands.AlignLeft" ToolTip="Align Left">
+                    <Image Source="{StaticResource lefticon}"/>
+                </Button>
+                <Button Command="EditingCommands.AlignCenter" ToolTip="Align Center">
+                    <Image Source="{StaticResource centericon}"/>
+                </Button>
+                <Button Command="EditingCommands.AlignRight" ToolTip="Align Right">
+                    <Image Source="{StaticResource righticon}"/>
+                </Button>
+            </ToolBar>
+            <ToolBar Band="2" BandIndex="1" Height="35">
+                <Button Command="EditingCommands.ToggleBold" ToolTip="Bold">
+                    <Image Source="{StaticResource boldicon}"/>
+                </Button>
+                <Button Command="EditingCommands.ToggleItalic" ToolTip="Italic">
+                    <Image Source="{StaticResource italicicon}"/>
+                </Button>
+                <Button Command="EditingCommands.ToggleUnderline" ToolTip="Underline">
+                    <Image Source="{StaticResource underlineicon}" Height="25" Width="36" RenderTransformOrigin="0.485,0.887"/>
+                </Button>
+            </ToolBar>
+            <ToolBar Band="2" BandIndex="2" Height="50">
+                <ComboBox Name="cbFonts" ItemsSource="{x:Static Fonts.SystemFontFamilies}" SelectedIndex="0" ToolTip="Font">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontFamily="{Binding}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Command="EditingCommands.IncreaseFontSize" ToolTip="Increase Font Size">
+                    <Image Source="{StaticResource increasefonticon}"/>
+                </Button>
+                <Button Command="EditingCommands.DecreaseFontSize" ToolTip="Decrease Font Size">
+                    <Image Source="{StaticResource decreasefonticon}"/>
+                </Button>
+            </ToolBar>
+            <ToolBar Band="2" BandIndex="3" Height="50">
+                <ext:ColorPicker Name="colorChooser" DisplayColorAndName="True"  SelectedColorChanged="colorChooser_SelectedColorChanged" ToolTip="Text Color"/>
+            </ToolBar>
+            <ToolBar Band="2" BandIndex="4" Height="50" Margin="10,0,58.333,0" RenderTransformOrigin="3.205,-0.439">
+                <Button Name="btnAbout" ToolTip="About MyWordPad" Click="btnAbout_Click">
+                    <Image Source="{StaticResource abouticon}"/>
+                </Button>
+                <Button CommandTarget="{Binding richTextBox1}" Command="local:CustomCommands.Exit" ToolTip="Exit">
+                    <Image Source="{StaticResource exiticon}"/>
+                </Button>
+
+            </ToolBar>
+            
+
+        </ToolBarTray>
+        <RichTextBox Margin="11,100,14,9" Name="richTextBox1" SpellCheck.IsEnabled="True" /> 
+    </Grid>
+</Window>
